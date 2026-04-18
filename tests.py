@@ -11,11 +11,16 @@ class TestBooksCollector:
         assert len(collector.get_books_genre()) == 2
 
     # 1. Тесты для add_new_book
-    def test_add_new_book_normal_name(self):
+    def test_add_new_book_normal_name_book_added(self):
         collector = BooksCollector()
         name = "Война и мир"
         collector.add_new_book(name)
         assert name in collector.get_books_genre()
+
+    def test_add_new_book_normal_name_genre_empty(self):
+        collector = BooksCollector()
+        name = "Война и мир"
+        collector.add_new_book(name)
         assert collector.get_book_genre(name) == ''
 
     def test_add_new_book_duplicate_name_not_added(self):
@@ -111,14 +116,18 @@ class TestBooksCollector:
         assert isinstance(collector.get_books_genre(), dict)
 
     # 6. Тесты для get_books_for_children
-    def test_get_books_for_children_excludes_age_rating(self):
+    def test_get_books_for_children_includes_child_book(self):
         collector = BooksCollector()
         collector.add_new_book("Детская")
-        collector.add_new_book("Ужасная")
         collector.set_book_genre("Детская", "Комедии")
-        collector.set_book_genre("Ужасная", "Ужасы")
         children_books = collector.get_books_for_children()
         assert "Детская" in children_books
+
+    def test_get_books_for_children_excludes_age_rating_book(self):
+        collector = BooksCollector()
+        collector.add_new_book("Ужасная")
+        collector.set_book_genre("Ужасная", "Ужасы")
+        children_books = collector.get_books_for_children()
         assert "Ужасная" not in children_books
 
     def test_get_books_for_children_no_books(self):
