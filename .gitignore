@@ -1,0 +1,37 @@
+# Перейдите в папку проекта
+cd C:\Users\soldi\one_two
+
+# Создайте файл .gitignore и запишите в него текст (замените текст ниже на ваш)
+@"
+# Виртуальное окружение
+.venv/
+venv/
+ENV/
+
+# Кэш и байт-код Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Файлы тестового покрытия
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Редакторы и IDE
+.vscode/
+.idea/
+*.swp
+
+# Логи
+*.log
+
+# Файлы окружения
+.env
+*.env
+.target
+# Файлы сборки и дистрибуции
+dist/
+build/
+*.egg-info/
+"@ | Out-File -FilePath .gitignore -Encoding utf8
